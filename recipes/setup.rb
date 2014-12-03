@@ -2,11 +2,13 @@
 
 include_recipe "opsworks_delayed_job::service"
 
+Chef::Log.info('RUNNING DELAYED_JOB::SETUP')
+
 # setup delayed_job service per app
 node[:deploy].each do |application, deploy|
 
   if deploy[:application_type] != 'rails'
-    Chef::Log.debug("Skipping opsworks_delayed_job::setup application #{application} as it is not a Rails app")
+    Chef::Log.info("Skipping opsworks_delayed_job::setup application #{application} as it is not a Rails app")
     next
   end
 
